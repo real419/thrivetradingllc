@@ -1,0 +1,73 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  CLIENT
+  SUPER_ADMIN
+  FINANCE_ADMIN
+}
+
+enum Status {
+  ACTIVE
+  SUSPENDED
+  PENDING
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(CLIENT)
+  createdAt    DateTime @default(now())
+
+  profile   ClientProfile?
+  auditLogs AuditLog[]     @relation("AdminAuditLogs")
+}
+
+model ClientProfile {
+  id             String   @id @default(uuid())
+  clientId       String   @unique
+  userId         String   @unique
+  firstName      String
+  lastName       String
+  phone          String
+  status         Status   @default(ACTIVE)
+  accountType    String   @default("Standard Growth")
+  welcomeMessage String?  @default("Welcome to your private financial portfolio.")
+  createdAt      DateTime @default(now())
+
+  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  financials       ClientFinancials?
+  auditLogs        AuditLog[]        @relation("ClientAuditLogs")
+}
+
+model ClientFinancials {
+  id             String   @id @default(uuid())
+  clientId       String   @unique
+  initialDeposit Decimal  @default(0.00) @db.Decimal(12, 2)
+  currentBalance Decimal  @default(0.00) @db.Decimal(12, 2)
+  profit         Decimal  @default(0.00) @db.Decimal(12, 2)
+  withdrawals    Decimal  @default(0.00) @db.Decimal(12, 2)
+  updatedAt      DateTime @updatedAt
+
+  client ClientProfile @relation(fields: [clientId], references: [clientId], onDelete: Cascade)
+}
+
+model AuditLog {
+  id             String   @id @default(uuid())
+  adminId        String
+  targetClientId String
+  previousValue  String
+  newValue       String
+  reason         String
+  createdAt      DateTime @default(now())
+
+  admin  User          @relation("AdminAuditLogs", fields: [adminId], references: [id])
+  client ClientProfile @relation("ClientAuditLogs", fields: [targetClientId], references: [clientId])
+}
