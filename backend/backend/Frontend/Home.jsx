@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Zap, Globe, TrendingUp, BarChart3, Lock } from 'lucide-react';
+import { ShieldCheck, Zap, Globe, TrendingUp, BarChart3, Lock, Star } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -97,6 +97,70 @@ export default function Home() {
             <p className="text-slate-500 text-sm leading-relaxed">
               Role-based authorization middleware (RBAC) separates administrative permissions from client user spaces.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Client Testimonials Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200 mb-3">
+            Client Success Stories
+          </span>
+          <h2 className="text-3xl font-bold text-navy-900">Trusted by Traders Worldwide</h2>
+          <p className="text-slate-500 text-sm mt-2">See what professionals and private investors have to say about scaling their portfolios on our platform.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="flex text-amber-400 space-x-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-current" />
+                ))}
+              </div>
+              <p className="text-slate-600 text-sm leading-relaxed italic">
+                "Thrivetradingllc completely changed how I manage my allocations. The real-time execution speeds and transparency are unmatched."
+              </p>
+            </div>
+            <div className="border-t border-slate-100 pt-4 mt-4">
+              <h4 className="font-bold text-navy-900 text-sm">Samuel Johnson</h4>
+              <p className="text-xs text-slate-400">Portfolio Manager • Lagos</p>
+            </div>
+          </div>
+
+          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="flex text-amber-400 space-x-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-current" />
+                ))}
+              </div>
+              <p className="text-slate-600 text-sm leading-relaxed italic">
+                "The interface layout is intuitive, lightning fast, and clean. It makes tracking multi-asset portfolios effortless on both mobile and PC."
+              </p>
+            </div>
+            <div className="border-t border-slate-100 pt-4 mt-4">
+              <h4 className="font-bold text-navy-900 text-sm">Amina Bello</h4>
+              <p className="text-xs text-slate-400">Private Investor • Abuja</p>
+            </div>
+          </div>
+
+          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="flex text-amber-400 space-x-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-current" />
+                ))}
+              </div>
+              <p className="text-slate-600 text-sm leading-relaxed italic">
+                "Top-tier infrastructure with reliable security and audit trails. I have absolute peace of mind trading here."
+              </p>
+            </div>
+            <div className="border-t border-slate-100 pt-4 mt-4">
+              <h4 className="font-bold text-navy-900 text-sm">David Adeleke</h4>
+              <p className="text-xs text-slate-400">Active Trader • Port Harcourt</p>
+            </div>
           </div>
         </div>
       </section>
