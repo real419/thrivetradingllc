@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Navigate } from "react-router-dom";
 
+const API_BASE = (import.meta.env.VITE_API_URL || "https://thrivetradingllc.onrender.com") + "/api";
+
 export default function Portfolio() {
   const token = localStorage.getItem("token");
 
@@ -22,8 +24,6 @@ export default function Portfolio() {
   const [price, setPrice] = useState(185.5);
   const [error, setError] = useState("");
 
-  const API_BASE = "http://localhost:5001";
-
   const fetchPortfolioData = useCallback(async () => {
     try {
       const storedUser = JSON.parse(localStorage.getItem("user") || "{}");
@@ -32,8 +32,8 @@ export default function Portfolio() {
       if (!activeUserId) return;
 
       const [tradesRes, userRes] = await Promise.all([
-        fetch(`${API_BASE}/api/trades?userId=${activeUserId}`),
-        fetch(`${API_BASE}/api/user/${activeUserId}`)
+        fetch(`${API_BASE}/trades?userId=${activeUserId}`),
+        fetch(`${API_BASE.replace('/api', '')}/api/user/${activeUserId}`)
       ]);
 
       if (!tradesRes.ok || !userRes.ok) throw new Error("Backend synchronization error");
@@ -99,7 +99,7 @@ export default function Portfolio() {
     };
 
     try {
-      const res = await fetch(`${API_BASE}/api/trades`, {
+      const res = await fetch(`${API_BASE}/trades`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newOrder)

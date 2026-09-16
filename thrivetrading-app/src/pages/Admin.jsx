@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-const API_BASE = "http://localhost:5001/api";
+const API_BASE = (import.meta.env.VITE_API_URL || "https://thrivetradingllc.onrender.com") + "/api";
 
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -85,7 +85,7 @@ export default function Admin() {
         setLoginError("Invalid admin credentials. Use admin@example.com / admin123");
       }
     } catch (err) {
-      setLoginError("Server connection failed. Make sure backend is running on port 5001.");
+      setLoginError("Server connection failed. Make sure backend is running.");
     }
   };
 

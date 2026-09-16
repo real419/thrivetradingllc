@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
+const API_BASE = (import.meta.env.VITE_API_URL || "https://thrivetradingllc.onrender.com") + "/api";
+
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +21,7 @@ export default function Login() {
       localStorage.removeItem("token");
 
       // 2. Authenticate user against backend
-      const response = await fetch("http://localhost:5001/api/login", {
+      const response = await fetch(`${API_BASE}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -42,7 +44,7 @@ export default function Login() {
       navigate("/portfolio");
     } catch (err) {
       console.error("Login Server Error:", err);
-      setError("Unable to communicate with the server. Ensure backend is online on port 5001.");
+      setError("Unable to communicate with the server. Ensure backend is online.");
     } finally {
       setLoading(false);
     }
