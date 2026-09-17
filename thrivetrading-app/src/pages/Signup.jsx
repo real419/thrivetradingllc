@@ -26,7 +26,14 @@ export default function Signup() {
         body: JSON.stringify({ name, email, password }),
       });
 
-      const data = await response.json();
+      // Safely check if the response is actually JSON before parsing
+      const contentType = response.headers.get("content-type");
+      let data = {};
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        throw new Error("Server returned an invalid response. Please try again shortly.");
+      }
 
       if (!response.ok) {
         throw new Error(data.error || data.message || "Registration failed.");
