@@ -3,7 +3,15 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'https://thrivetradingllc.com', 
+    'https://www.thrivetradingllc.com', 
+    'https://thrivetradingllc.netlify.app'
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // In-memory data stores for this deployment
