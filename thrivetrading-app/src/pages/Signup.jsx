@@ -73,7 +73,7 @@ export default function Signup() {
         </div>
         <div>
           <label style={{ display: "block", fontSize: "0.85rem", color: "#94a3b8", marginBottom: "0.25rem" }}>Email Address</label>
-          <input .
+          <input 
             type="email" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
