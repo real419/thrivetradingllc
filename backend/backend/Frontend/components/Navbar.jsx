@@ -8,7 +8,7 @@ export default function Navbar() {
   // Helper to highlight active page link
   const isActive = (path) => location.pathname === path;
 
-  // Optional: Read auth status from localStorage (will use public links if not logged in)
+  // Read auth status from localStorage
   const token = localStorage.getItem('token');
   const userRole = localStorage.getItem('role');
 
@@ -115,47 +115,59 @@ export default function Navbar() {
           <Link 
             to="/" 
             onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800"
+            className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/') ? 'text-cyan-400 bg-slate-800' : 'text-slate-300 hover:text-white hover:bg-slate-800'}`}
           >
             Home
           </Link>
           <Link 
             to="/about" 
             onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800"
+            className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/about') ? 'text-cyan-400 bg-slate-800' : 'text-slate-300 hover:text-white hover:bg-slate-800'}`}
           >
             About
           </Link>
           <Link 
             to="/investments" 
             onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800"
+            className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/investments') ? 'text-cyan-400 bg-slate-800' : 'text-slate-300 hover:text-white hover:bg-slate-800'}`}
           >
             Investments
           </Link>
           <Link 
             to="/contact" 
             onClick={() => setIsOpen(false)}
-            className="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800"
+            className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/contact') ? 'text-cyan-400 bg-slate-800' : 'text-slate-300 hover:text-white hover:bg-slate-800'}`}
           >
             Contact
           </Link>
 
           <div className="pt-4 border-t border-slate-800 flex flex-col space-y-2">
-            <Link 
-              to="/login" 
-              onClick={() => setIsOpen(false)}
-              className="w-full text-center py-2 text-sm font-semibold text-slate-300 hover:text-white bg-slate-800 rounded-lg"
-            >
-              Sign In
-            </Link>
-            <Link 
-              to="/signup" 
-              onClick={() => setIsOpen(false)}
-              className="w-full text-center py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg"
-            >
-              Get Started
-            </Link>
+            {token ? (
+              <Link 
+                to={userRole === 'ADMIN' ? '/admin' : '/dashboard'} 
+                onClick={() => setIsOpen(false)}
+                className="w-full text-center py-2.5 text-sm font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg shadow-md"
+              >
+                Go to Portal
+              </Link>
+            ) : (
+              <>
+                <Link 
+                  to="/login" 
+                  onClick={() => setIsOpen(false)}
+                  className="w-full text-center py-2.5 text-sm font-semibold text-slate-300 hover:text-white bg-slate-800 rounded-lg"
+                >
+                  Sign In
+                </Link>
+                <Link 
+                  to="/signup" 
+                  onClick={() => setIsOpen(false)}
+                  className="w-full text-center py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

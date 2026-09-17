@@ -1,54 +1,95 @@
-import React from 'react';
+import React from "react";
 
-const testimonials = [
+const testimonialsData = [
   {
-    quote: "Thrivetradingllc completely changed how I manage my investments. The interface is lightning fast and secure.",
-    name: "Samuel Johnson",
-    role: "Portfolio Manager",
-    location: "Lagos"
+    quote: "Thrivetradingllc completely changed how I manage my portfolio. The interface is lightning fast and incredibly reliable.",
+    name: "Adebayo S.",
+    role: "Full-Time Trader",
+    avatar: "AS",
   },
   {
-    quote: "The real-time tracking and clean layout make financial planning effortless. Highly recommended!",
-    name: "Amina Bello",
-    role: "Private Investor",
-    location: "Abuja"
+    quote: "The security and seamless transaction tracking give me total peace of mind. Outstanding platform performance!",
+    name: "Chidinma O.",
+    role: "Financial Analyst",
+    avatar: "CO",
   },
   {
-    quote: "Top-tier fintech platform with unmatched speed and reliability. Outstanding user experience.",
-    name: "David Adeleke",
-    role: "Crypto Trader",
-    location: "Port Harcourt"
-  }
+    quote: "Setting up my account and monitoring trades on mobile has never been easier. Highly recommended for any serious trader.",
+    name: "Michael K.",
+    role: "Cryptocurrency Investor",
+    avatar: "MK",
+  },
 ];
 
 export default function Testimonials() {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white">
-      <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-          Trusted by Traders Worldwide
-        </h2>
-        <p className="text-slate-400 max-w-2xl mx-auto mb-12 text-sm sm:text-base">
-          See what our clients have to say about their experience scaling their investments with our platform.
-        </p>
+    <section style={{ padding: "4rem 1.5rem", background: "#0f172a", color: "#fff" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        
+        {/* Section Header */}
+        <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+          <h2 style={{ fontSize: "2.25rem", color: "#38bdf8", fontWeight: "bold", marginBottom: "0.75rem" }}>
+            Trusted by Traders Worldwide
+          </h2>
+          <p style={{ color: "#94a3b8", fontSize: "1rem", maxWidth: "600px", margin: "0 auto" }}>
+            Here is what our community has to say about their experience on the Thrivetradingllc platform.
+          </p>
+        </div>
 
-        {/* Responsive Grid: 1 column on mobile, 3 columns on desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-          {testimonials.map((item, index) => (
+        {/* Testimonials Grid (Responsive: stacks on mobile, 3 columns on desktop) */}
+        <div style={{ 
+          display: "grid", 
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", 
+          gap: "2rem" 
+        }}>
+          {testimonialsData.map((item, index) => (
             <div 
               key={index} 
-              className="bg-slate-800 p-6 sm:p-8 rounded-2xl border border-slate-700 shadow-xl flex flex-col justify-between"
+              style={{ 
+                background: "#1e293b", 
+                border: "1px solid #334155", 
+                borderRadius: "8px", 
+                padding: "2rem",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+              }}
             >
-              <p className="text-slate-300 italic mb-6 text-sm sm:text-base leading-relaxed">
+              <p style={{ color: "#cbd5e1", fontSize: "0.95rem", lineHeight: "1.6", marginBottom: "1.5rem", fontStyle: "italic" }}>
                 "{item.quote}"
               </p>
-              <div>
-                <h3 className="font-semibold text-white text-base">{item.name}</h3>
-                <p className="text-xs sm:text-sm text-emerald-400">{item.role} • {item.location}</p>
+
+              <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                {/* Avatar Badge */}
+                <div style={{ 
+                  width: "45px", 
+                  height: "45px", 
+                  borderRadius: "50%", 
+                  background: "#38bdf8", 
+                  color: "#0f172a", 
+                  display: "flex", 
+                  alignItems: "center", 
+                  justifyContent: "center", 
+                  fontWeight: "bold",
+                  fontSize: "0.95rem"
+                }}>
+                  {item.avatar}
+                </div>
+
+                <div>
+                  <h4 style={{ color: "#f8fafc", fontSize: "1rem", fontWeight: "600", margin: "0" }}>
+                    {item.name}
+                  </h4>
+                  <span style={{ color: "#94a3b8", fontSize: "0.85rem" }}>
+                    {item.role}
+                  </span>
+                </div>
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

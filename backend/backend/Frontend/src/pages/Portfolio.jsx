@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import DashboardOverview from '../components/DashboardOverview';
 
+// Define your live Render backend base URL
+const API_BASE_URL = "https://thrivetradingllc.onrender.com/api";
+
 export default function Portfolio() {
   const [trades, setTrades] = useState([]);
   const [userTier, setUserTier] = useState('Retail');
@@ -13,12 +16,12 @@ export default function Portfolio() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  // 1. Fetch trades and user data from backend on load using relative endpoints
+  // 1. Fetch trades and user data from the live Render backend
   const fetchData = async () => {
     try {
       const [tradesRes, usersRes] = await Promise.all([
-        fetch('/api/trades'),
-        fetch('/api/users')
+        fetch(`${API_BASE_URL}/trades`),
+        fetch(`${API_BASE_URL}/users`)
       ]);
 
       if (tradesRes.ok) {
@@ -48,7 +51,7 @@ export default function Portfolio() {
     setMessage('');
 
     try {
-      const res = await fetch('/api/trades', {
+      const res = await fetch(`${API_BASE_URL}/trades`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -84,7 +87,7 @@ export default function Portfolio() {
         <h2 className="text-lg font-semibold">Place New Order</h2>
         {message && <div className="p-2 bg-blue-600 rounded text-sm">{message}</div>}
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm">Asset Symbol</label>
             <input
@@ -136,16 +139,16 @@ export default function Portfolio() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2 bg-green-600 hover:bg-green-500 rounded font-bold"
+          className="w-full py-2 bg-green-600 hover:bg-green-500 rounded font-bold transition-colors"
         >
           {loading ? 'Processing Order...' : 'Submit Order'}
         </button>
       </form>
 
-      {/* Trades History Table */}
-      <div className="bg-slate-800 text-white p-4 rounded-lg">
+      {/* Trades History Table with horizontal scroll for mobile */}
+      <div className="bg-slate-800 text-white p-4 rounded-lg overflow-x-auto">
         <h2 className="text-lg font-semibold mb-3">Executed Trades History</h2>
-        <table className="w-full text-left text-sm">
+        <table className="w-full text-left text-sm min-w-[500px]">
           <thead>
             <tr className="border-b border-slate-700">
               <th className="p-2">ID</th>
@@ -157,18 +160,24 @@ export default function Portfolio() {
             </tr>
           </thead>
           <tbody>
-            {trades.map((trade) => (
-              <tr key={trade.id} className="border-b border-slate-700/50">
-                <td className="p-2">#{trade.id}</td>
-                <td className="p-2 font-mono">{trade.symbol}</td>
-                <td className={`p-2 font-bold ${trade.side === 'BUY' ? 'text-green-400' : 'text-red-400'}`}>
-                  {trade.side}
-                </td>
-                <td className="p-2">{trade.amount}</td>
-                <td className="p-2">${trade.price}</td>
-                <td className="p-2">{new Date(trade.createdAt).toLocaleTimeString()}</td>
+            {trades.length === 0 ? (
+              <tr>
+                <td colSpan="6" className="p-4 text-center text-slate-400">No trades executed yet.</td>
               </tr>
-            ))}
+            ) : (
+              trades.map((trade) => (
+                <tr key={trade.id} className="border-b border-slate-700/50">
+                  <td className="p-2">#{trade.id}</td>
+                  <td className="p-2 font-mono">{trade.symbol}</td>
+                  <td className={`p-2 font-bold ${trade.side === 'BUY' ? 'text-green-400' : 'text-red-400'}`}>
+                    {trade.side}
+                  </td>
+                  <td className="p-2">{trade.amount}</td>
+                  <td className="p-2">${trade.price}</td>
+                  <td className="p-2">{new Date(trade.createdAt).toLocaleTimeString()}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

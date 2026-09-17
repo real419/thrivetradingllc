@@ -21,7 +21,7 @@
     "express": "^4.22.3",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^1.45.0",
-    "react-router-dom": "^7.18.3"
+    "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
     "concurrently": "^10.0.5",

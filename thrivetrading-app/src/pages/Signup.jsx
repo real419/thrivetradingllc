@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
-const API_BASE = (import.meta.env.VITE_API_URL || "https://thrivetradingllc.onrender.com") + "/api";
+import { API_BASE_URL } from "../config/api"; // Updated to use named import matching your configuration file
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -19,7 +18,7 @@ export default function Signup() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_BASE}/register`, {
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -28,7 +27,7 @@ export default function Signup() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Registration failed.");
+        throw new Error(data.error || data.message || "Registration failed.");
       }
 
       setSuccess("Account registered successfully! Redirecting to login...");

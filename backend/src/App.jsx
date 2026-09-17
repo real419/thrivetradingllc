@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
+import Testimonials from './components/Testimonials'; // Newly added testimonials component
 
 // Public Pages
 import Home from './pages/Public/Home';
@@ -76,8 +77,13 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<PublicLayout><SafeComponent Component={Home} fallbackName="Home" /></PublicLayout>} />
+        {/* Public Routes - Home now includes the Testimonials section below the main component */}
+        <Route path="/" element={
+          <PublicLayout>
+            <SafeComponent Component={Home} fallbackName="Home" />
+            <Testimonials />
+          </PublicLayout>
+        } />
         <Route path="/about" element={<PublicLayout><SafeComponent Component={About} fallbackName="About" /></PublicLayout>} />
         <Route path="/investments" element={<PublicLayout><SafeComponent Component={Investments} fallbackName="Investments" /></PublicLayout>} />
         <Route path="/contact" element={<PublicLayout><SafeComponent Component={Contact} fallbackName="Contact" /></PublicLayout>} />

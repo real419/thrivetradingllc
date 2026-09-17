@@ -4,34 +4,34 @@ import { ShieldCheck, Zap, Globe, TrendingUp, BarChart3, Lock, Star } from 'luci
 
 export default function Home() {
   return (
-    <div className="space-y-20 pb-20">
+    <div className="space-y-16 sm:space-y-20 pb-20 overflow-x-hidden">
       
       {/* Hero Section */}
-      <section className="relative bg-navy-900 text-white overflow-hidden py-24 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+      <section className="relative bg-navy-900 text-white overflow-hidden py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
+          <div className="space-y-6 text-center lg:text-left">
             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-brandBlue/20 text-brandCyan border border-brandCyan/30">
               Institutional Trading Infrastructure
             </span>
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
               Next-Generation <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brandBlue to-brandCyan">
                 Fintech & Investment Engine
               </span>
             </h1>
-            <p className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl">
+            <p className="text-slate-300 text-sm sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
               Execute high-frequency multi-asset trades, track live equity metrics, and grow portfolio wealth on a secure, audit-ready trading platform.
             </p>
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-4">
               <Link 
                 to="/signup" 
-                className="px-6 py-3.5 rounded-xl bg-brandBlue hover:bg-blue-600 text-white font-bold text-sm shadow-lg shadow-blue-500/20 transition"
+                className="px-6 py-3.5 rounded-xl bg-brandBlue hover:bg-blue-600 text-white font-bold text-sm shadow-lg shadow-blue-500/20 transition text-center"
               >
                 Open Trading Account
               </Link>
               <Link 
                 to="/investments" 
-                className="px-6 py-3.5 rounded-xl bg-navy-800 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold text-sm transition"
+                className="px-6 py-3.5 rounded-xl bg-navy-800 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold text-sm transition text-center"
               >
                 View Structured Plans
               </Link>
@@ -39,7 +39,7 @@ export default function Home() {
           </div>
 
           {/* Metric Dashboard Preview */}
-          <div className="bg-navy-800 border border-slate-700 rounded-2xl p-6 shadow-2xl space-y-4">
+          <div className="bg-navy-800 border border-slate-700 rounded-2xl p-4 sm:p-6 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-slate-700 pb-4">
               <div className="flex items-center space-x-3">
                 <div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
@@ -50,11 +50,11 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-4 pt-2">
               <div className="bg-navy-900 p-4 rounded-xl border border-slate-700/60">
                 <p className="text-xs text-slate-400">Global Liquidity</p>
-                <p className="text-xl font-bold text-white mt-1">$42.8M+</p>
+                <p className="text-lg sm:text-xl font-bold text-white mt-1">$42.8M+</p>
               </div>
               <div className="bg-navy-900 p-4 rounded-xl border border-slate-700/60">
                 <p className="text-xs text-slate-400">Execution Speed</p>
-                <p className="text-xl font-bold text-emerald-400 mt-1">&lt; 14ms</p>
+                <p className="text-lg sm:text-xl font-bold text-emerald-400 mt-1">&lt; 14ms</p>
               </div>
             </div>
           </div>
@@ -63,13 +63,13 @@ export default function Home() {
 
       {/* Core Pillars */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-3xl font-bold text-navy-900">Built for Serious Investors</h2>
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-navy-900">Built for Serious Investors</h2>
           <p className="text-slate-500 text-sm mt-2">Enterprise architecture designed around security, speed, and real-time clarity.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
             <div className="w-12 h-12 rounded-xl bg-blue-50 text-brandBlue flex items-center justify-center">
               <ShieldCheck className="w-6 h-6" />
             </div>
@@ -79,7 +79,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
             <div className="w-12 h-12 rounded-xl bg-cyan-50 text-brandCyan flex items-center justify-center">
               <Zap className="w-6 h-6" />
             </div>
@@ -89,7 +89,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
             <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
               <Lock className="w-6 h-6" />
             </div>
@@ -103,16 +103,16 @@ export default function Home() {
 
       {/* Client Testimonials Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-600 border border-emerald-200 mb-3">
             Client Success Stories
           </span>
-          <h2 className="text-3xl font-bold text-navy-900">Trusted by Traders Worldwide</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-navy-900">Trusted by Traders Worldwide</h2>
           <p className="text-slate-500 text-sm mt-2">See what professionals and private investors have to say about scaling their portfolios on our platform.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="flex text-amber-400 space-x-1">
                 {[...Array(5)].map((_, i) => (
@@ -129,7 +129,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="flex text-amber-400 space-x-1">
                 {[...Array(5)].map((_, i) => (
@@ -146,7 +146,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="flex text-amber-400 space-x-1">
                 {[...Array(5)].map((_, i) => (

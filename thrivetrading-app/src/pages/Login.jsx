@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
-const API_BASE = (import.meta.env.VITE_API_URL || "https://thrivetradingllc.onrender.com") + "/api";
+import { API_BASE_URL } from "../config/api"; // Corrected to named import matching standard config setup
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -20,8 +19,8 @@ export default function Login() {
       localStorage.removeItem("user");
       localStorage.removeItem("token");
 
-      // 2. Authenticate user against backend
-      const response = await fetch(`${API_BASE}/login`, {
+      // 2. Authenticate user against backend (API_BASE_URL already contains /api)
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
