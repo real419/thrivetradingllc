@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { API_BASE_URL } from "../config/api"; // Updated to use named import matching your configuration file
+import { API_BASE_URL } from "../config/api";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -73,7 +73,7 @@ export default function Signup() {
         </div>
         <div>
           <label style={{ display: "block", fontSize: "0.85rem", color: "#94a3b8", marginBottom: "0.25rem" }}>Email Address</label>
-          <input 
+          <input .
             type="email" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
