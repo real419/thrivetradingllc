@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { API_BASE_URL } from "../config/api";
+
+// Self-contained API base URL to eliminate file-resolution build errors
+const API_BASE_URL = "https://thrivetradingllc-backend.onrender.com/api";
 
 export default function Signup() {
   const [name, setName] = useState("");

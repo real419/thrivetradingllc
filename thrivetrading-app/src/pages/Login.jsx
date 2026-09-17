@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { API_BASE_URL } from "../config/api"; // Corrected to named import matching standard config setup
+
+// Self-contained API base URL to eliminate file-resolution build errors
+const API_BASE_URL = "https://thrivetradingllc-backend.onrender.com/api";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -19,7 +21,7 @@ export default function Login() {
       localStorage.removeItem("user");
       localStorage.removeItem("token");
 
-      // 2. Authenticate user against backend (API_BASE_URL already contains /api)
+      // 2. Authenticate user against backend
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
