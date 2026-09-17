@@ -11,7 +11,9 @@ let trades = [
   { id: 1, symbol: "AAPL", side: "BUY", amount: 10, price: 185.50, userId: 1 }
 ];
 
-let users = [];
+let users = [
+  { id: 1, name: "Demo Trader", email: "trader@thrivetrading.com", password: "password123", balance: 5000, profit: 450, status: "Approved" }
+];
 
 // --- AUTH ROUTES ---
 app.post("/api/auth/register", (req, res) => {
@@ -26,12 +28,20 @@ app.post("/api/auth/register", (req, res) => {
     return res.status(400).json({ error: "User already registered." });
   }
 
-  const newUser = { id: users.length + 1, name: name || "Trader", email, password };
+  const newUser = { 
+    id: users.length + 1, 
+    name: name || "Trader", 
+    email, 
+    password, 
+    balance: 1000, 
+    profit: 0, 
+    status: "Pending" 
+  };
   users.push(newUser);
 
   res.status(201).json({ 
     message: "User registered successfully", 
-    user: { id: newUser.id, name: newUser.name, email: newUser.email } 
+    user: { id: newUser.id, name: newUser.name, email: newUser.email, balance: newUser.balance, profit: newUser.profit, status: newUser.status } 
   });
 });
 
@@ -45,8 +55,37 @@ app.post("/api/auth/login", (req, res) => {
 
   res.json({
     token: "mock-jwt-token-" + user.id,
-    user: { id: user.id, name: user.name, email: user.email }
+    user: { id: user.id, name: user.name, email: user.email, balance: user.balance, profit: user.profit, status: user.status }
   });
+});
+
+// --- ADMIN ROUTES ---
+app.post("/api/admin/login", (req, res) => {
+  const { email, password } = req.body;
+  if (email === "admin@example.com" && password === "admin123") {
+    return res.json({ success: true, message: "Admin authenticated" });
+  }
+  res.status(401).json({ error: "Invalid admin credentials" });
+});
+
+app.get("/api/users", (req, res) => {
+  res.json(users);
+});
+
+app.put("/api/admin/users/:id", (req, res) => {
+  const userId = parseInt(req.params.id);
+  const { status, balance, profit } = req.body;
+
+  const user = users.find(u => u.id === userId);
+  if (!user) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  if (status !== undefined) user.status = status;
+  if (balance !== undefined) user.balance = parseFloat(balance);
+  if (profit !== undefined) user.profit = parseFloat(profit);
+
+  res.json({ message: "User updated successfully", user });
 });
 
 // --- TRADES ROUTES ---

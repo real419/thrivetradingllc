@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-const API_BASE = (import.meta.env.VITE_API_URL || "https://thrivetradingllc.onrender.com") + "/api";
+// Pointing directly to your live Render backend URL
+const API_BASE = "https://thrivetradingllc-backend.onrender.com/api";
 
 export default function Admin() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -223,7 +224,7 @@ export default function Admin() {
             Capital & Account Management
           </h2>
           <p style={{ color: "#94a3b8", margin: 0, fontSize: "0.9rem" }}>
-            Adjust balances, profit figures, and user approval statuses directly in PostgreSQL.
+            Adjust balances, profit figures, and user approval statuses directly.
           </p>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
